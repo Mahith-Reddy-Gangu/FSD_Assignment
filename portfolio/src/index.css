@@ -1,12 +1,12 @@
 :root {
---bg-color: #f4efe8;
---text-color: #1d1b19;
---primary-color: #ffffff;
---secondary-bg: #fffaf4;
---border-color: #e5d9cc;
---accent-color: #c15b31;
---accent-dark: #8f3f1f;
---shadow-color: rgba(54, 36, 23, 0.12);
+  --bg-color: #f4efe8;
+  --text-color: #1d1b19;
+  --primary-color: #ffffff;
+  --secondary-bg: #fffaf4;
+  --border-color: #e5d9cc;
+  --accent-color: #c15b31;
+  --accent-dark: #8f3f1f;
+  --shadow-color: rgba(54, 36, 23, 0.12);
 }
 * {
 box-sizing: border-box;
@@ -318,4 +318,92 @@ gap: 0.4rem;
 .hero-tags span {
 padding: 0.4rem 0.65rem;
 }
+}
+[data-theme="dark"] {
+  --bg-color: #1d1b19;
+  --text-color: #f4efe8;
+  --primary-color: #2a2622;
+  --secondary-bg: #24211e;
+  --border-color: #4a423a;
+  --accent-color: #d1754f;
+  --accent-dark: #b55633;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+nav a.active {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  box-shadow: 0 10px 20px rgba(193, 91, 49, 0.2);
+}
+
+.btn-small {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 99px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-block;
+  margin-right: 0.5rem;
+  transition: all 0.3s;
+}
+
+.btn-small.outline {
+  background: transparent;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+}
+
+.card-actions {
+  margin-top: 1.5rem;
+}
+
+.theme-toggle {
+  background: var(--secondary-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+button:disabled, button.disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.loading-screen {
+  text-align: center;
+  padding: 4rem 2rem;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Fix hardcoded backgrounds for Dark Mode */
+[data-theme="dark"] header {
+  background: rgba(42, 38, 34, 0.9);
+  border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] section {
+  background: linear-gradient(180deg, rgba(42, 38, 34, 0.95), rgba(36, 33, 30, 0.98));
+}
+
+[data-theme="dark"] footer {
+  background: rgba(42, 38, 34, 0.72);
+}
+
+[data-theme="dark"] input, 
+[data-theme="dark"] textarea {
+  background-color: #1d1b19;
+  color: #f4efe8;
+  border-color: var(--border-color);
+}
+
+/* Ensure navbar links in dark mode have good contrast when not hovered */
+[data-theme="dark"] nav a {
+  color: var(--text-color);
+  background: rgba(209, 117, 79, 0.15); /* Slightly brighter accent for dark mode visibility */
 }

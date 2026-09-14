@@ -1,0 +1,19 @@
+{
+  "info": {
+    "name": "Portfolio Assignment 3 API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:5000" }],
+  "item": [
+    { "name": "B1 Health Check", "request": { "method": "GET", "url": "{{baseUrl}}/" } },
+    { "name": "B2 List Projects", "request": { "method": "GET", "url": "{{baseUrl}}/api/projects" } },
+    { "name": "B3 Single Project", "request": { "method": "GET", "url": "{{baseUrl}}/api/projects/geospatial-ai" } },
+    { "name": "B3 Missing Project (404)", "request": { "method": "GET", "url": "{{baseUrl}}/api/projects/missing-project" } },
+    { "name": "B4 Valid Contact", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Demo Student\",\n  \"email\": \"demo@example.com\",\n  \"message\": \"Testing the portfolio API\"\n}" }, "url": "{{baseUrl}}/api/contact" } },
+    { "name": "B4 Invalid Contact (400)", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"name\": \"Demo Student\",\n  \"email\": \"not-an-email\",\n  \"message\": \"Invalid email test\"\n}" }, "url": "{{baseUrl}}/api/contact" } },
+    { "name": "B5 List Contacts", "request": { "method": "GET", "url": "{{baseUrl}}/api/contact" } },
+    { "name": "B6 Unknown Route (404)", "request": { "method": "GET", "url": "{{baseUrl}}/api/doesnotexist" } },
+    { "name": "B6 Malformed JSON (400)", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{ invalid json" }, "url": "{{baseUrl}}/api/contact" } },
+    { "name": "B7 CORS Preflight", "request": { "method": "OPTIONS", "header": [{ "key": "Origin", "value": "http://localhost:5173" }, { "key": "Access-Control-Request-Method", "value": "GET" }], "url": "{{baseUrl}}/api/projects" } }
+  ]
+}

@@ -1,12 +1,68 @@
-# Portfolio Website - Assignment 1
+# Portfolio Website - Assignment 3 Backend Extension
 
-## Design Rationale
-The design of this personal portfolio website focuses on clean aesthetics, readability, and a seamless user experience across devices. The color palette utilizes CSS custom properties to maintain consistency, featuring a professional blue primary color against a light gray background to ensure sufficient WCAG AA minimum color contrast. The semantic HTML structure ensures that screen readers and search engines can easily parse the content, strictly using semantic tags to establish a clear hierarchy.
+This repository contains the React portfolio from Assignment 2 plus a Node.js/Express API for Assignment 3. Project data is served by the API, and the contact form submits to and persists data through the API.
 
-## Layout Technique Justification
-To build a responsive and flexible layout, I employed a hybrid approach using both CSS Grid and Flexbox. 
-Flexbox was selected for one-dimensional layouts, specifically the navigation bar and form elements. It allows the navigation links to easily wrap and stack vertically on smaller viewports. 
-CSS Grid was implemented for the overall structural layout and the Projects section. Grid excels at two-dimensional layouts, enabling the project cards to automatically adjust their columns based on the available screen width using `repeat(auto-fit, minmax(300px, 1fr))`. This eliminates the need for excessive media queries while keeping the cards uniform in size.
+## Install and Run
 
-## Known Limitations
-While the website fulfills all structural and styling requirements, there are a few inherent limitations due to the restriction of using only HTML and CSS. The contact form currently lacks backend processing; clicking "Send" will not transmit data to a server. Additionally, without JavaScript, the site lacks advanced interactivity, such as a functional mobile hamburger menu toggle, dynamic content loading, or complex view transitions. These features will be integrated in future assignments to elevate the static pages into a fully functional web application.
+Prerequisite: Node.js 18 or newer.
+
+From `portfolio`, install and start the backend:
+
+```bash
+npm install
+cd server
+npm install
+copy .env.example .env
+npm start
+```
+
+In a second terminal, from `portfolio`, start the frontend with `npm run dev`, then open `http://localhost:5173`. The backend runs at `http://localhost:5000`.
+
+## Environment Configuration
+
+Copy `server/.env.example` to `server/.env`:
+
+```env
+PORT=5000
+ALLOWED_ORIGIN=http://localhost:5173
+CONTACTS_FILE=./data/contacts.json
+```
+
+`.env` is ignored by Git. The committed `.env.example` contains every required variable and no secrets.
+
+## API Endpoints
+
+All API responses are JSON. CORS allows the React development-server origin configured by `ALLOWED_ORIGIN`.
+
+- `GET /` returns HTTP 200 with `{ "status": "ok", "service": "portfolio-api" }`.
+- `GET /api/projects` returns four server-side projects. Every object includes `id`, `title`, `description`, `techStack`, `image`, and `link`.
+- `GET /api/projects/:id` returns one project. A missing id returns HTTP 404 with `{ "error": "Project not found" }`.
+- `POST /api/contact` accepts `{ "name", "email", "message" }`, validates all fields and email format, returns HTTP 201, and persists valid submissions.
+- `GET /api/contact` returns all persisted submissions. This endpoint is intentionally open without authentication for assignment verification and is not production-ready personal-data storage.
+- Undefined routes return HTTP 404 JSON. Malformed JSON returns HTTP 400 JSON. Unexpected errors return HTTP 500 JSON through centralized middleware.
+
+## Storage and Frontend Integration
+
+Projects are stored in `server/data/projects.js`. Contacts are persisted in `server/data/contacts.json` with Node filesystem APIs; the contact file is Git-ignored.
+
+`Projects.jsx` and `ProjectDetail.jsx` use `useEffect` and plain `fetch` with loading, error, and deep-link states. `Contact.jsx` posts to the API, displays server errors, and resets after success. Assignment 2 routing, theme persistence, responsive layout, and the not-found page remain available.
+
+## API Testing Artifact
+
+Import [portfolio/postman/Portfolio-Assignment3.postman_collection.json](portfolio/postman/Portfolio-Assignment3.postman_collection.json) into Postman. It covers health, projects, project 404, contact success and validation failure, contact listing, unknown route, malformed JSON, and CORS preflight.
+
+## Validation
+
+From `portfolio`, run `npm run build` and `npm run lint`. Use the Postman collection while the backend is running.
+
+## Assignment 3 Recording
+
+The required 2-3 minute demonstration is available here:
+
+[Assignment 3 Backend Recording](Assignment3_Backend_Recording.mp4)
+
+The video is stored with Git LFS because the recording is larger than GitHub's regular file-size limit. Follow [Assignment3_Video_Recording_Guide.md](Assignment3_Video_Recording_Guide.md) for the demonstrated requirements.
+
+## Academic Integrity Disclosure
+
+This implementation was completed with coding-assistant support. The student should review, understand, and be prepared to explain every file and behavior before submission, in accordance with the assignment brief.
