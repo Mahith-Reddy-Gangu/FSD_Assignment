@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Portfolio Website - Assignment 3 Backend Extension
 
 This repository contains the React portfolio from Assignment 2 plus a Node.js/Express API for Assignment 3. Project data is served by the API, and the contact form submits to and persists data through the API.
@@ -34,12 +35,6 @@ CONTACTS_FILE=./data/contacts.json
 
 All API responses are JSON. CORS allows the React development-server origin configured by `ALLOWED_ORIGIN`.
 
-- `GET /` returns HTTP 200 with `{ "status": "ok", "service": "portfolio-api" }`.
-- `GET /api/projects` returns four server-side projects. Every object includes `id`, `title`, `description`, `techStack`, `image`, and `link`.
-- `GET /api/projects/:id` returns one project. A missing id returns HTTP 404 with `{ "error": "Project not found" }`.
-- `POST /api/contact` accepts `{ "name", "email", "message" }`, validates all fields and email format, returns HTTP 201, and persists valid submissions.
-- `GET /api/contact` returns all persisted submissions. This endpoint is intentionally open without authentication for assignment verification and is not production-ready personal-data storage.
-- Undefined routes return HTTP 404 JSON. Malformed JSON returns HTTP 400 JSON. Unexpected errors return HTTP 500 JSON through centralized middleware.
 
 ## Storage and Frontend Integration
 
@@ -66,3 +61,21 @@ The video is stored with Git LFS because the recording is larger than GitHub's r
 ## Academic Integrity Disclosure
 
 This implementation was completed with coding-assistant support. The student should review, understand, and be prepared to explain every file and behavior before submission, in accordance with the assignment brief.
+=======
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+>>>>>>> origin/main
